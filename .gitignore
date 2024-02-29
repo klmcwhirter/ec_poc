@@ -161,4 +161,8 @@ cython_debug/
 
 .pdm-python
 
-sysroot/
+!sysroot/etc/modprobe.d/.gitkeep
+!sysroot/etc/X11/xorg.conf.d/.gitkeep
+!sysroot/lib/udev/rules.d/.gitkeep
+!sysroot/usr/share/sddm/scripts/.gitkeep
+!sysroot/var/cache/envycontrol/.gitkeep
