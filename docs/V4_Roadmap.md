@@ -18,6 +18,7 @@
 
 * Adopt [pdm](https://pdm-project.org/latest/) usage for testing, packaging and publishing
 * Adopt project structure as created by [`pdm init`](https://pdm-project.org/latest/usage/project/#new-project)
+* Add AUTHORS.md, CHANGELOG.md, CONTRIBUTING.md, etc. like most FLOSS projects have in place to enable those who would like to join the project.
 * Adopt guidance from the new [Python Packaging User Guide](https://packaging.python.org/en/latest/)
 * Adopt [pytest](https://docs.pytest.org/en/stable/) for unit and integration testing
   * At least 50% test coverage (measured with pytest-cov) - enforced via [github action status check](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks)
@@ -25,6 +26,7 @@
 * Support Python >= 3.10
 * Distribute as a Python package with `envycontrol` wrapper shell script to maintain current interface
 * Adopt github actions for CI/CD pipeline
+  * Example: [pytest github workflows](https://github.com/pytest-dev/pytest/tree/main/.github/workflows)
   * [Using scripts to test your code on a runner](https://docs.github.com/en/actions/examples/using-scripts-to-test-your-code-on-a-runner)
   * [About packaging with GitHub Actions](https://docs.github.com/en/actions/publishing-packages/about-packaging-with-github-actions)
   * Not Python, but ... [Publishing Node.js packages](https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages)
