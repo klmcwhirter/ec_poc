@@ -47,9 +47,9 @@
   * provides mechanism to override values as analysis steps proceed
   * output process simply emits stuff from context
 * Move file content constants to "templates" that can be customized by users
-  * note that delivered templates will be in "envycontrol/src/templates/" directory
+  * note that delivered templates will be in "envycontrol/templates/" directory
   * customized versions will be in "/etc/envycontrol/templates/" directory
-  * this should address issues like [#34](https://github.com/bayasdev/envycontrol/issues/34) and maybe [#142](https://github.com/bayasdev/envycontrol/issues/142) to the extent that the user can put in place guidance they receive from the community
+  * this should address issues like [#34](https://github.com/bayasdev/envycontrol/issues/34) and maybe [#142](https://github.com/bayasdev/envycontrol/issues/142) to the extent that the user can put in place guidance they receive from the community themselves
 * Add customizable envycontrol rules for state transitions between Optimus modes
   * these are envycontrol rules NOT udev rules - Python code modules
   * allow for elegant per-display-manager customizations via separate dir per display-manager
@@ -57,6 +57,8 @@
   * this should allow users to add / remove files to change / delete instead of them being hard coded
   * [#141 - Please make it init agnostic](https://github.com/bayasdev/envycontrol/issues/141)
   * [#145 - Runit?](https://github.com/bayasdev/envycontrol/issues/145) - eliminates the need for [ToneyFoxxy's](https://github.com/ToneyFoxxy/ToneyFoxxy-EnvyControl-Without-SystemD) customizations
+* Do we need a level of abstraction to model the different init subsystems so that different actions can be taken?
+  * What would that look like?
 * Add custom profiles to simplify command lines:
   * envycontrol switch --profile my_hybrid ==> `envycontrol --switch hybrid --rtd3 1`
   * envycontrol switch --profile my_nvidia ==> `envycontrol --switch nvidia --force-comp --coolbits 24 --dm sddm --use-nvidia-current`
@@ -76,7 +78,12 @@
 
 ## Timeline
 
-TBD
+TBD - what to announce to the public
+
+* Alpha - maintainers only - ??? and who?
+* Beta - ??? - who?
+* RC - ??? - maintainers only? who?
+* GA -???
 
 ## Deployment Model
 ```
@@ -112,9 +119,28 @@ envycontrol 4.x.x - switch between GPU modes on Nvidia Optimus systems
   switch [MODE]     Where MODE is integrated, hybrid or nvidia; e.g., `envycontrol switch integrated`
     --profile [NAME] Perform switch based on values in ENVYCONTROL_ETC/profiles/NAME.json or ENVYCONTROL_HOME/profiles/NAME.json
                     E.g., `envycontrol switch --profile my_nvidia`
-    [OPTS]          Allow any available non-verb options; these override values in profile used if any
+    --init [INIT]   Where INIT is the init system in use [default: systemd]
+                    E.g., `envycontrol switch --profile my_nvidia --init dinit`
+                    E.g., `envycontrol switch --profile my_nvidia --init runit`
+                    E.g., `envycontrol switch --profile my_nvidia --init systemd`
+    [OPTS]          Allow any available non-verb options; these override values in profile used if any - but get cached and logged
                     E.g., `envycontrol switch --profile my_hybrid --rtd3 0`
                     E.g., `envycontrol switch hybrid --rtd3 1`
+                    E.g., `envycontrol switch nvidia --force_comp --coolbits 24`
+                    E.g., `envycontrol switch --profile my_nvidia --dm gdm3`
+                    E.g., `envycontrol switch --profile my_nvidia --dm i3 --init dinit`
+                    E.g., `envycontrol switch --profile my_nvidia --dm lightdm`
+    integrated
+      --verbose
+    hybrid
+      --rtd3 [PM]
+      --verbose
+    nvidia
+      --coolbits [BITS]
+      --dm [DM]
+      --force_comp
+      --verbose
+
 
   profile [NAME]
     copy [TO_NAME]  Copy profile from ENVYCONTROL_HOME/profiles/NAME.json to ENVYCONTROL_ETC/profiles/TO_NAME.json
