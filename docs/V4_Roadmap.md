@@ -42,9 +42,9 @@
   * use unpacking instead of positional parameters to simplifying calling functions
   * usage of "walrus operator" as appropriate - [3.8 assignment expressions](https://docs.python.org/3/whatsnew/3.8.html#assignment-expressions)
   * custom generic contextmanagers that ease the coding of file creation operations
-* Refactor as a package (note can be bundled as a zip file to keep 'single file delivery')
+* Refactor as a package
 * Refactor to construct "context" class that collects data prior to emitting file changes
-  * provides mechanism to override values as analysis steps proceed.
+  * provides mechanism to override values as analysis steps proceed
   * output process simply emits stuff from context
 * Move file content constants to "templates" that can be customized by users
   * note that delivered templates will be in "envycontrol/src/templates/" directory
@@ -58,8 +58,8 @@
   * [#141 - Please make it init agnostic](https://github.com/bayasdev/envycontrol/issues/141)
   * [#145 - Runit?](https://github.com/bayasdev/envycontrol/issues/145) - eliminates the need for [ToneyFoxxy's](https://github.com/ToneyFoxxy/ToneyFoxxy-EnvyControl-Without-SystemD) customizations
 * Add custom profiles to simplify command lines:
-  * envycontrol --profile my_hybrid ==> `envycontrol --switch hybrid --rtd3 1`
-  * envycontrol --profile my_nvidia ==> `envycontrol --switch nvidia --force-comp --coolbits 24 --dm sddm --use-nvidia-current`
+  * envycontrol switch --profile my_hybrid ==> `envycontrol --switch hybrid --rtd3 1`
+  * envycontrol switch --profile my_nvidia ==> `envycontrol --switch nvidia --force-comp --coolbits 24 --dm sddm --use-nvidia-current`
 * While researching which of the 3 methods to use to install the nvidia drivers on Fedora 39, I ran into this video.
   * [The Linux Experiment - NVIDIA on Linux is WAY BETTER than everyone says, but...](https://youtu.be/9f4B8uIPqcE)
   * Wayland support is MUCH better on modern Linux kernels and 30 series and up cards.
@@ -110,10 +110,10 @@ envycontrol 4.x.x - switch between GPU modes on Nvidia Optimus systems
   --------------------------
 
   switch [MODE]     Where MODE is integrated, hybrid or nvidia; e.g., `envycontrol switch integrated`
-    profile [NAME]  Perform switch based on values in ENVYCONTROL_ETC/profiles/NAME.json or ENVYCONTROL_HOME/profiles/NAME.json
-                    E.g., `envycontrol switch profile my_nvidia`
+    --profile [NAME] Perform switch based on values in ENVYCONTROL_ETC/profiles/NAME.json or ENVYCONTROL_HOME/profiles/NAME.json
+                    E.g., `envycontrol switch --profile my_nvidia`
     [OPTS]          Allow any available non-verb options; these override values in profile used if any
-                    E.g., `envycontrol switch profile my_hybrid --rtd3 0`
+                    E.g., `envycontrol switch --profile my_hybrid --rtd3 0`
                     E.g., `envycontrol switch hybrid --rtd3 1`
 
   profile [NAME]
